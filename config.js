@@ -12,12 +12,12 @@ import { watchFile, unwatchFile } from 'fs'
  const __dirname = global.__dirname(import.meta.url) 
   
  global.owner =
-[['51929972576', '🍇𝙹𝚡𝚝𝚡𝚗 𝚃𝙱🍇', true],
-['584129799955', '🤙รձռร г4🤙', true],
-['50558124470', '💖𝙴𝙽𝙳𝙴𝚁 𝙻𝙱💖', true],['1(415)4841812']],
+[['51907183648', '🍇𝙹𝚡𝚝𝚡𝚗 𝚃𝙱🍇', true],
+['51907183648', '🤙รձռร г4🤙', true],
+['51967647592', '💖naye 𝙻𝙱💖', true],['1(415)4841812']],
 
- global.animxscans = ['51929972576'] 
- global.suittag = ['51929972576'] 
+ global.animxscans = ['51907183648'] 
+ global.suittag = ['51907183648'] 
  global.mods = [] 
  global.prems = []
 global.packname = '× Stickers V2\ngithub.com/TurboBot-MD\n\n× Script:\ngithub.com/Jxtxn17/TurboBot-MD'
@@ -32,7 +32,7 @@ global.library = 'Baileys'
 global.baileys = '@whiskeysockets/baileys'
 global.lenguaje = 'Español'
 global.menudi = ['⛶','❏','⫹⫺']
-global.dev = '51929972576'
+global.dev = '51907183648'
 
 let file = fileURLToPath(import.meta.url)
 watchFile(file, () => { unwatchFile(file)
