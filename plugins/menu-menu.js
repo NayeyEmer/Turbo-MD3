@@ -1,384 +1,340 @@
-import fetch from 'node-fetch';
-const handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPrems}) => {
-  try {
-  if (usedPrefix == 'a' || usedPrefix == 'A') return;
+//CÓDIGO ADAPTADO POR https://github.com/GataNina-Li | @gata_dios & https://github.com/Undefined17 | @Azami
 
-  const date = d.toLocaleDateString(locale, {day: 'numeric', month: 'long', year: 'numeric'});
-  const {money, joincount} = global.db.data.users[m.sender];
-  const {exp, limit, level, role} = global.db.data.users[m.sender];
-  const pp = await conn.profilePictureUrl(conn.user.jid).catch(_ => 'https://telegra.ph/file/24fa902ead26340f3df2c.png');
-  const fkon = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: `status@broadcast` } : {}) }, message: { 'contactMessage': { 'displayName': wm, 'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:XL;${wm},;;;\nFN:${wm},\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabell:Ponsel\nEND:VCARD`, 'jpegThumbnail': imagen1, thumbnail: imagen1 ,sendEphemeral: true}}};
-    await conn.reply(m.chat, '*En breve se enviara el menu. . .*',m, { contextInfo:{ forwardingScore: 2022, isForwarded: true, externalAdReply: {title: '👋 Hola!!', body: 'bienvenido', sourceUrl: global.md, thumbnail: await (await fetch(pp)).buffer() }}})
-//m.react('🐶');
-    await conn.sendMessage(m.chat, { react: { text: '🐶', key: m.key } })
-  let txt =`┏━━━━━━━━━━━━━━━━━━┓
-┣⟣☯︎ *𝙾𝚆𝙽𝙴𝚁:* 𝙷𝙰𝙲𝙷𝙴𝙹𝙾𝚃𝙰
-┣⟣☯︎ *𝙽𝚄𝙼𝙴𝚁𝙾:* +51 992 004 117
-┣⟣☯︎ *𝙸𝙳𝙸𝙾𝙼𝙰:* 𝙴𝚂𝙿𝙰𝙽̃𝙾𝙻 
-┣⟣☯︎ *𝙼𝙾𝙳𝙾:* 𝙿𝚄𝙱𝙻𝙸𝙲𝙾
-┣⟣☯︎ *𝙵𝙴𝙲𝙷𝙰:* ${date}
-┗━━━━━━━━━━━━━━━━━━┛
+import fs from 'fs'
+import fetch from 'node-fetch'
+import { xpRange } from '../lib/levelling.js'
+const { levelling } = '../lib/levelling.js'
+import PhoneNumber from 'awesome-phonenumber'
+import { promises } from 'fs'
+import { join } from 'path'
+const { generateWAMessageFromContent, proto } = (await import('@whiskeysockets/baileys')).default
 
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙱𝙾𝚃 𝙾𝙵𝙲 𝙾 𝚂𝚄𝙱 𝙱𝙾𝚃❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣ *Este es el Bot oficial*
-┗━━━━━━━━━━━━━━━━┛
+let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, command }) => {
+try {
+let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
+const d = new Date(new Date + 3600000);
+    const locale = 'es';
+    const week = d.toLocaleDateString(locale, {weekday: 'long'});
+    const date = d.toLocaleDateString(locale, {day: 'numeric', month: 'long', year: 'numeric'});
+let name = conn.getName(m.sender)
+let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
+let { exp, diamond, level, role, money } = global.db.data.users[m.sender]
+let totalreg = Object.keys(global.db.data.users).length
+    let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
+let _uptime = process.uptime() * 1000
+let uptime = clockString(_uptime)
 
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝚂𝙾𝙻𝚄𝙲𝙸𝙾𝙽 𝙰 𝙴𝚁𝚁𝙾𝚁𝙴𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣➤ Mensajes en espera
-┣⟣❥ _.fixmsgespera_
-┣➤ Mensajes en espera (owner)
-┣⟣❥ _.dsowner_
-┗━━━━━━━━━━━━━━━━┛
+let pp = await conn.profilePictureUrl(conn.user.jid).catch(_ => 'https://telegra.ph/file/24fa902ead26340f3df2c.png')
+let fkontak = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: `status@broadcast` } : {}) }, message: { 'contactMessage': { 'displayName': wm, 'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:XL;${wm},;;;\nFN:${wm},\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabell:Ponsel\nEND:VCARD`, 'jpegThumbnail': imagen1, thumbnail: imagen1 ,sendEphemeral: true}}}
+let links = linkSity.getRandom()
+    const ftrol = {
+    key : {
+    remoteJid: 'status@broadcast',
+    participant : '0@s.whatsapp.net'
+    },
+    message: {
+    orderMessage: {
+    itemCount : 2023,
+    status: 1,
+    surface : 1,
+    message: `${name}!`, 
+    orderTitle: `▮Menu ▸`,
+    sellerJid: '0@s.whatsapp.net' 
+    }
+    }
+    }
 
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙸𝙽𝙵𝙾 𝙱𝙾𝚃 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.grupos_
-┣⟣❥ _.estado_
-┣⟣❥ _.infobot_
-┣⟣❥ _.speedtest_
-┣⟣❥ _.donar_
-┣⟣❥ _.owner_
-┣⟣❥ _.script_
-┣⟣❥ _Bot_ (𝑢𝑠𝑜 𝑠𝑖𝑛 𝑝𝑟𝑒𝑓𝑖𝑗𝑜)
-┗━━━━━━━━━━━━━━━━┛
+let d1 = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+let d2 = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+let d3  = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+let d4 = 'application/pdf'
+let d5 = 'application/vnd.android.package-archive'
+let d6 = 'application/zip'
+let td = `${pickRandom([d1,d2,d3,d4,d5,d6])}`
+    
+    const fload = {
+    key : {
+    remoteJid: 'status@broadcast',
+    participant : '0@s.whatsapp.net' 
+    },
+    message: {
+    orderMessage: {
+    itemCount : 2023,
+    status: 1,
+    surface : 1,
+    message: `${name}` + `\n🚀 Cargando ^ω^`, 
+    orderTitle: `▮Menu ▸`,
+    sellerJid: '0@s.whatsapp.net' 
+    }
+    }
+    }
+    await conn.reply(m.chat, '*Enviando el menu . . .*', fload, { contextInfo:{ forwardingScore: 2022, isForwarded: true, externalAdReply: {title: '👋 Hola!!', body: saludo, sourceUrl: global.ig, thumbnail: await (await fetch(pp)).buffer() }}})
+m.react('👻')     
+let menu = `╭━〔 U S U A R I OS 〕━◉
+┃╭━━━━━━━━━━━━━━◉
+┃┃🎃 *Nombre :* ${name}
+┃┃🎃 *Limite :* ${diamond}
+┃┃🎃 *Nivel :* ${level}
+┃┃🎃 *Rango :* ${role}
+┃┃🎃 *Exp :* ${exp}
+┃╰━━━━━━━━━━━━━◉
+┠┌─⭓『 I N F O B O T 』
+┃┃🎃 *Creador :* Jxtxn17 
+┃┃🎃 *Numero:* wa.me/5
+┃┃🎃 *Tiempo Activo:* ${uptime}
+┃┃🎃 *Registrado :* ${rtotalreg} de ${totalreg} usuarios
+┃└──────────⭓
+┠┌─⭓『 I N F O R M A C I Ó N  』
+┃│🎃 ${usedPrefix}estado
+┃│🎃 ${usedPrefix}owner
+┃│🎃 ${usedPrefix}grouplist
+┃│🎃 ${usedPrefix}donar
+┃│🎃 ${usedPrefix}grupos
+┃│🎃 ${usedPrefix}infobot
+┃│🎃 ${usedPrefix}cuenta
+┃│🎃 ${usedPrefix}reporte
+┃│🎃 ${usedPrefix}join
+┃│🎃 ${usedPrefix}bot
+┃└──────────⭓
+┠┌─⭓『 J A D I B O T 』
+┃│🎃 ${usedPrefix}Serbot 
+┃│🎃 ${usedPrefix}jadibot
+┃│🎃 ${usedPrefix}bots
+┃│🎃 ${usedPrefix}deletesesion
+┃│🎃 ${usedPrefix}stop
+┃└──────────⭓
+┠┌─⭓『D E S C A R G A S 』
+┃│🎃 ${usedPrefix}play
+┃│🎃 ${usedPrefix}play2
+┃│🎃 ${usedPrefix}yta
+┃│🎃 ${usedPrefix}ytv
+┃│🎃 ${usedPrefix}facebook
+┃│🎃 ${usedPrefix}tiktok
+┃│🎃 ${usedPrefix}instagram
+┃│🎃 ${usedPrefix}gitclone
+┃│🎃 ${usedPrefix}pinterest
+┃│🎃 ${usedPrefix}imagen
+┃│🎃 ${usedPrefix}mediafire
+┃└──────────⭓
+┠┌─⭓『B U S C A D O R E S 』
+┃│🎃 ${usedPrefix}google
+┃│🎃 ${usedPrefix}yts
+┃└──────────⭓
+┠┌─⭓『C O N V E R T I D O R E S 』
+┃│🎃 ${usedPrefix}toimg
+┃│🎃 ${usedPrefix}tomp3
+┃│🎃 ${usedPrefix}toptt
+┃│🎃 ${usedPrefix}tourl
+┃│🎃 ${usedPrefix}tovideo
+┃│🎃 ${usedPrefix}tts
+┃└──────────⭓
+┠┌─⭓『A U D I O S   E F E C T O S 』
+┃│🎃 ${usedPrefix}bass
+┃│🎃 ${usedPrefix}blown
+┃│🎃 ${usedPrefix}deep
+┃│🎃 ${usedPrefix}earrape
+┃│🎃 ${usedPrefix}fas
+┃│🎃 ${usedPrefix}fast
+┃│🎃 ${usedPrefix}nightcore
+┃│🎃 ${usedPrefix}reverse
+┃│🎃 ${usedPrefix}robot
+┃│🎃 ${usedPrefix}slow
+┃│🎃 ${usedPrefix}smooth
+┃│🎃 ${usedPrefix}tupai
+┃│🎃 ${usedPrefix}squirrel
+┃│🎃 ${usedPrefix}chipmunk
+┃└──────────⭓
+┠┌─⭓『H E R R A M I E N T A S 』
+┃│🎃 ${usedPrefix}acortar
+┃│🎃 ${usedPrefix}qr
+┃│🎃 ${usedPrefix}delete
+┃│🎃 ${usedPrefix}readmore
+┃│🎃 ${usedPrefix}styletext
+┃└──────────⭓
+┠┌─⭓『J U E G O S 』
+┃│🎃 ${usedPrefix}mates
+┃│🎃 ${usedPrefix}math
+┃│🎃 ${usedPrefix}simi
+┃│🎃 ${usedPrefix}suerte
+┃│🎃 ${usedPrefix}ppt
+┃│🎃 ${usedPrefix}tictactoe
+┃│🎃 ${usedPrefix}deltictactoe
+┃│🎃 ${usedPrefix}topgays
+┃│🎃 ${usedPrefix}topotakus
+┃│🎃 ${usedPrefix}gay
+┃│🎃 ${usedPrefix}doxear
+┃│🎃 ${usedPrefix}pregunta
+┃│🎃 ${usedPrefix}apostar
+┃│🎃 ${usedPrefix}slot
+┃│🎃 ${usedPrefix}dado
+┃│🎃 ${usedPrefix}sorteo
+┃└──────────⭓
+┠┌─⭓『G R U P O S 』
+┃│🎃 ${usedPrefix}grupo
+┃│🎃 ${usedPrefix}kick
+┃│🎃 ${usedPrefix}add
+┃│🎃 ${usedPrefix}banchat
+┃│🎃 ${usedPrefix}unbanchat
+┃│🎃 ${usedPrefix}admins
+┃│🎃 ${usedPrefix}infogroup
+┃│🎃 ${usedPrefix}promote
+┃│🎃 ${usedPrefix}demote
+┃│🎃 ${usedPrefix}hidetag
+┃│🎃 ${usedPrefix}tagall
+┃│🎃 ${usedPrefix}link
+┃│🎃 ${usedPrefix}banchat
+┃│🎃 ${usedPrefix}unbanchat
+┃└──────────⭓
+┠┌─⭓『F R A S E S 』
+┃│🎃 ${usedPrefix}consejo
+┃│🎃 ${usedPrefix}piropo
+┃│🎃 ${usedPrefix}refran
+┃└──────────⭓
+┠┌─⭓『E N A B L E / D I S A B L E 』
+┃│🎃 ${usedPrefix}enable welcome
+┃│🎃 ${usedPrefix}disable welcome
+┃│🎃 ${usedPrefix}enable public
+┃│🎃 ${usedPrefix}disable public
+┃│🎃 ${usedPrefix}enble antilink
+┃│🎃 ${usedPrefix}disable antilink
+┃│🎃 ${usedPrefix}enable antilink2
+┃│🎃 ${usedPrefix}disable antilink2
+┃│🎃 ${usedPrefix}enable restrict
+┃│🎃 ${usedPrefix}disable restrict
+┃│🎃 ${usedPrefix}enable autoread
+┃│🎃 ${usedPrefix}disable autoread
+┃│🎃 ${usedPrefix}enable detect
+┃│🎃 ${usedPrefix}disable detect
+┃│🎃 ${usedPrefix}enable pconly
+┃│🎃 ${usedPrefix}disable pconly
+┃│🎃 ${usedPrefix}enable gconly
+┃│🎃 ${usedPrefix}disable gconly
+┃└──────────⭓
+┠┌─⭓『R P G 』
+┃│🎃 ${usedPrefix}minar
+┃│🎃 ${usedPrefix}minar3
+┃│🎃 ${usedPrefix}minardiamantes
+┃│🎃 ${usedPrefix}daily
+┃│🎃 ${usedPrefix}work
+┃│🎃 ${usedPrefix}afk
+┃│🎃 ${usedPrefix}rob
+┃│🎃 ${usedPrefix}limit
+┃│🎃 ${usedPrefix}reg
+┃│🎃 ${usedPrefix}unreg
+┃│🎃 ${usedPrefix}myns
+┃│🎃 ${usedPrefix}perfil
+┃│🎃 ${usedPrefix}levelup
+┃└──────────⭓
+┠┌─⭓『STICKER 』
+┃│🎃 ${usedPrefix}s
+┃│🎃 ${usedPrefix}wm
+┃└──────────⭓
+┠┌─⭓『O W N E R 』
+┃│🎃 ${usedPrefix}update
+┃│🎃 ${usedPrefix}restart
+┃│🎃 ${usedPrefix}autoadmin
+┃│🎃 ${usedPrefix}leave
+┃│🎃 ${usedPrefix}salir
+┃│🎃 ${usedPrefix}cleartpm
+┃│🎃 ${usedPrefix}bc
+┃│🎃 ${usedPrefix}bcgc
+┃│🎃 ${usedPrefix}bcc
+┃│🎃 ${usedPrefix}banuser
+┃│🎃 ${usedPrefix}unbanuser
+┃└──────────⭓
+╰━━━━━━━━━━━━━◉`
+function _0x2daf() {
+    const _0x4c1076 = ['namedoc', 'social', '1017dFLzIP', '11680bWFOeX', 'sendMessage', '1FnTozH', '6qNtNxK', '445374chjKag', '2096504ySppGm', '627669MaFyqj', 'readFileSync', 'En breve se enviará el menú...', '374160lMCurS', '356228pujvOS', './storage/logos/MenuJS.jpg', '1019845zOpQQK', 'pdf', 'chat'];
+    _0x2daf = function() {
+        return _0x4c1076;
+    };
+    return _0x2daf();
+}
+const _0x110137 = _0x13bb; 
+(function(_0x14d3d7, _0x67b65e) {
+    const _0x3a56bf = {
+            _0x2e964c: 0x1b0,
+            _0x4fc539: 0x1bd,
+            _0x2a1845: 0x1b1,
+            _0x2b6724: 0x1b3,
+            _0x4293cc: 0x1b8,
+            _0x59080a: 0x1b9
+        },
+        _0x30692c = _0x13bb,
+        _0x119b1c = _0x14d3d7();
+    while (!![]) {
+        try {
+            const _0x181128 = parseInt(_0x30692c(0x1bb)) / 0x1 * (parseInt(_0x30692c(_0x3a56bf._0x2e964c)) / 0x2) + parseInt(_0x30692c(_0x3a56bf._0x4fc539)) / 0x3 + parseInt(_0x30692c(_0x3a56bf._0x2a1845)) / 0x4 + parseInt(_0x30692c(_0x3a56bf._0x2b6724)) / 0x5 * (parseInt(_0x30692c(0x1bc)) / 0x6) + -parseInt(_0x30692c(0x1ad)) / 0x7 + -parseInt(_0x30692c(0x1be)) / 0x8 + parseInt(_0x30692c(_0x3a56bf._0x4293cc)) / 0x9 * (-parseInt(_0x30692c(_0x3a56bf._0x59080a)) / 0xa);
+            if (_0x181128 === _0x67b65e) break;
+            else _0x119b1c['push'](_0x119b1c['shift']());
+        } catch (_0x1caf7d) {
+            _0x119b1c['push'](_0x119b1c['shift']());
+        }
+    }
+}(_0x2daf, 0x235d2));
 
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝚁 𝙷𝙰𝙲𝙷𝙸𝙺𝙾 𝙱𝙾𝚃 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.descargarbot_
-┗━━━━━━━━━━━━━━━━┛
+function _0x13bb(_0x16c7de, _0x1a27b8) {
+const _0x2dafbc = _0x2daf();
+return _0x13bb = function(_0x13bbaf, _0x156d41) {
+_0x13bbaf = _0x13bbaf - 0x1ad;
+let _0x1a2b8a = _0x2dafbc[_0x13bbaf];
+return _0x1a2b8a;
+}, _0x13bb(_0x16c7de, _0x1a27b8);
+}
+let buttonMessage = {
+    'document': {
+        'url': md,
+    },
+    'mimetype': td,
+    'fileName': '☰ D A S B O A R D ☰',
+    'fileLength': '99999999999999',
+    'pageCount': '999',
+    'contextInfo': {
+    'externalAdReply': {
+    'showAdAttribution': !![],
+            'mediaType': 0x1,
+            'previewType': "PHOTO",
+            'title': 'Hola!!',
+            'thumbnail': imagen1,
+            'renderLargerThumbnail': !![],
+            'sourceUrl': md
+        }
+    },
+  'caption': menu['trim']()
+}
+await conn.sendMessage(m.chat, buttonMessage, {quoted: fkontak})
+} catch {
+conn.reply(m.chat, '*⚠️ EL MENU TIENE UN ERROR PRUEBE CON EL MENU COMPLETO: (.menucompleto)*', fpoll, m)
+}}
+handler.tags = ['main']
+handler.command = /^(menu)$/i
+handler.register = true
+export default handler
 
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝚄𝙽𝙴 𝙴𝙻 𝙱𝙾𝚃 𝙰 𝚃𝚄 𝙶𝚁𝚄𝙿𝙾 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.join *<enlace / link / url>*_
-┗━━━━━━━━━━━━━━━━┛
+function clockString(ms) {
+let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
+let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
+let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
+return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')}
 
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙷𝙰𝚂𝚃𝙴 𝚂𝚄𝙱 𝙱𝙾𝚃 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.serbot_
-┣⟣❥ _.stop_
-┣⟣❥ _.bots_
-┗━━━━━━━━━━━━━━━━┛  
+function ucapan() {
+    const time = moment.tz('America/Los_Angeled').format('HH')
+    let res = "Buenas noches 🌙"
+    if (time >= 4) {
+        res = "Buen día 🌄"
+    }
+    if (time > 10) {
+        res = "Buenas tardes ☀️"
+    }
+    if (time >= 15) {
+        res = "Buenas tardes 🌅"
+    }
+    if (time >= 18) {
+        res = "Buenas noches 🌙"
+    }
+    return res
+}
 
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙹𝚄𝙴𝙶𝙾𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.menujuegos_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙰𝙲𝚃𝙸𝚅𝙰𝚁 𝙾 𝙳𝙴𝚂𝚂𝙲𝚃𝙸𝚅𝙰𝚁 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.enable_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┣❍ 𝚁𝙴𝙿𝙾𝚁𝚃𝙰𝚁 𝙵𝙰𝙻𝙻𝙾𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣ ⟣❥ _.reporte *<texto>*_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙳𝙴𝚂𝙲𝙰𝚁𝙶𝙰𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.instagram *<enlace / link / url>*_
-┣⟣❥ _.mediafire *<enlace / link / url>*_
-┣⟣❥ _.gitclone *<enlace / link / url>*_
-┣⟣❥ _.gdrive *<enlace / link / url>*_
-┣⟣❥ _.tiktok *<enlace / link / url>*_
-┣⟣❥ _.tiktokimg *<enlace / link / url>*_
-┣⟣❥ _.xnxxdl *<enlace / link / url>*_
-┣⟣❥ _.xvideosdl *<enlace / link / url>*_
-┣⟣❥ _.twitter *<enlace / link / url>*_
-┣⟣❥ _.fb *<enlace / link / url>*_
-┣⟣❥ _.ytshort *<enlace / link / url>*_
-┣⟣❥ _.ytmp3 *<enlace / link / url>*_
-┣⟣❥ _.ytmp4 *<enlace / link / url>*_
-┣⟣❥ _.ytmp3doc *<enlace / link / url>*_
-┣⟣❥ _.ytmp4doc *<enlace / link / url>*_
-┣⟣❥ _.videodoc *<enlace / link / url>*_
-┣⟣❥ _.dapk2 *<enlace / link / url>*_
-┣⟣❥ _.stickerpack *<enlace / link / url>*_
-┣⟣❥ _.play *<texto>*_
-┣⟣❥ _.play2 *<texto>*_
-┣⟣❥ _.play.1 *<texto>*_
-┣⟣❥ _.play.2 *<texto>*_
-┣⟣❥ _.playdoc *<texto>*_
-┣⟣❥ _.playdoc2 *<texto>*_
-┣⟣❥ _.playlist *<texto>*_
-┣⟣❥ _.spotify *<texto>*_
-┣⟣❥ _.ringtone *<texto>*_
-┣⟣❥ _.soundcloud *<texto>*_
-┣⟣❥ _.imagen *<texto>*_
-┣⟣❥ _.pinterest *<texto>*_
-┣⟣❥ _.wallpaper *<texto>*_
-┣⟣❥ _.pptiktok *<nombre de usuario>*_
-┣ ⟣❥ _.igstalk *<nombre de usuario>*_
-┣⟣❥ _.igstory *<nombre de usuario>*_
-┣⟣❥ _.tiktokstalk *<username>*_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙱𝚄𝚂𝙲𝙰𝙳𝙾𝚁𝙴𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.githubsearch *<texto>*_
-┣⟣❥ _.pelisplus *<texto>*_
-┣⟣❥ _.modapk *<texto>*_
-┣⟣❥ _.stickersearch *<texto>*_
-┣⟣❥ _.stickersearch2 *<texto>*_
-┣⟣❥ _.xnxxsearch *<texto>*_
-┣⟣❥ _.animeinfo *<texto>*_
-┣⟣❥ _.google *<texto>*_
-┣⟣❥ _.letra *<texto>*_
-┣⟣❥ _.wikipedia *<texto>*_
-┣⟣❥ _.ytsearch *<texto>*_
-┣⟣❥ _.playstore *<texto>*_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙶𝚁𝚄𝙿𝙾𝚂 𝙰𝙹𝚄𝚂𝚃𝙴𝚂 ❍* 
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.add *<numero>*_
-┣⟣❥ _.kick *<@tag>*_
-┣⟣❥ _.kick2 *<@tag>*_
-┣⟣❥ _.listanum *<texto>*_
-┣⟣❥ _.kicknum *<texto>*_
-┣⟣❥ _.grupo *<abrir / cerrar>*_
-┣⟣❥ _.grouptime *<opcion> <tiempo>*_
-┣⟣❥ _.promote *<@tag>*_
-┣⟣❥ _.demote *<@tag>*_
-┣⟣❥ _admins *<texto>*_ (𝑢𝑠𝑜 𝑠𝑖𝑛 𝑝𝑟𝑒𝑓𝑖𝑗𝑜)
-┣⟣❥ _.demote *<@tag>*_
-┣⟣❥ _.infogroup_
-┣⟣❥ _.resetlink_
-┣⟣❥ _.link_
-┣⟣❥ _.setname *<texto>*_
-┣⟣❥ _.setdesc *<texto>*_
-┣⟣❥ _.invocar *<texto>*_
-┣⟣❥ _.setwelcome *<texto>*_
-┣⟣❥ _.setbye *<texto>*_
-┣⟣❥ _.hidetag *<texto>*_
-┣⟣❥ _.hidetag *<audio>*_
-┣⟣❥ _.hidetag *<video>*_
-┣⟣❥ _.hidetag *<imagen>*_
-┣⟣❥ _.warn *<@tag>*_
-┣⟣❥ _.unwarn *<@tag>*_
-┣⟣❥ _.listwarn_
-┣⟣❥ _.fantasmas_
-┣⟣❥ _.destraba_
-┣⟣❥ _.setpp *<imagen>*_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙲𝙾𝙽𝚅𝙴𝚁𝚃𝙸𝙳𝙾𝚁𝙴𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.toanime *<imagen>*_
-┣⟣❥ _.togifaud *<video>*_
-┣⟣❥ _.toimg *<sticker>*_
-┣⟣❥ _.tomp3 *<video>*_
-┣⟣❥ _.tomp3 *<nota de voz>*_
-┣⟣❥ _.toptt *<video / audio>*_
-┣⟣❥ _.tovideo *<sticker>*_
-┣⟣❥ _.tourl *<video / imagen / audio>*_
-┣⟣❥ _.tts *<idioma> <texto>*_
-┣⟣❥ _.tts *<efecto> <texto>*_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙴𝙵𝙴𝙲𝚃𝙾𝚂 𝚈 𝙻𝙾𝙶𝙾𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.logos *<efecto> <texto>*_
-┣⟣❥ _.logochristmas *<texto>*_
-┣⟣❥ _.logocorazon *<texto>*_
-┣⟣❥ _.ytcomment *<texto>*_
-┣⟣❥ _.hornycard *<@tag>*_
-┣⟣❥ _.simpcard *<@tag>*_
-┣⟣❥ _.lolice *<@tag>*_
-┣⟣❥ _.itssostupid_
-┣⟣❥ _.pixelar_
-┣⟣❥ _.blur_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙵𝚁𝙰𝚂𝙴𝚂 𝚈 𝙲𝙾𝙽𝚂𝙴𝙹𝙾𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.piropo_
-┣⟣❥ _.consejo_
-┣⟣❥ _.refran_
-┣⟣❥ _.fraseromantica_
-┣⟣❥ _.historiaromantica_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙰𝙽𝙸𝙼𝙴𝚂 𝚁𝙰𝙽𝙳𝙾𝙼❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.menuanimes_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙸𝙼𝙶 𝚁𝙰𝙽𝙳𝙾𝙼𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥  _.kpop *<blackpink / exo / bts>*_
-┣⟣❥ _.cristianoronaldo_
-┣⟣❥ _.messi_
-┣⟣❥ _.cat_
-┣⟣❥ _.dog_
-┣⟣❥ _.meme_
-┣⟣❥ _.itzy_
-┣⟣❥ _.blackpink_
-┣⟣❥ _.navidad_
-┣⟣❥ _.wpmontaña_
-┣⟣❥ _.pubg_
-┣⟣❥ _.wpgaming_
-┣⟣❥ _.wpaesthetic_
-┣⟣❥ _.wpaesthetic2_
-┣⟣❥ _.wprandom_
-┣⟣❥ _.wallhp_
-┣⟣❥ _.wpvehiculo_
-┣⟣❥ _.wpmoto_
-┣⟣❥ _.coffee_
-┣⟣❥ _.pentol_
-┣⟣❥ _.caricatura_
-┣⟣❥ _.ciberespacio_
-┣⟣❥ _.technology_
-┣⟣❥ _.doraemon_
-┣⟣❥ _.hacker_
-┣⟣❥ _.planeta_
-┣⟣❥ _.randomprofile_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 +18 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.labiblia_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙴𝙵𝙴𝙲𝚃𝙾𝚂 𝙳𝙴 𝙰𝚄𝙳𝙸𝙾 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┃- *𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝙰 𝙰𝚄𝙳𝙸𝙾 𝙾 𝙽𝙾𝚃𝙰 𝙳𝙴 𝚅𝙾𝚉*
-┣⟣❥ _.bass_
-┣⟣❥ _.blown_
-┣⟣❥ _.deep_
-┣⟣❥ _.earrape_
-┣⟣❥ _.fast_
-┣⟣❥ _.fat_
-┣⟣❥ _.nightcore_
-┣⟣❥ _.reverse_
-┣⟣❥ _.robot_
-┣⟣❥ _.slow_
-┣⟣❥ _.smooth_
-┣⟣❥ _.tupai_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙷𝙴𝚁𝚁𝙰𝙼𝙸𝙴𝙽𝚃𝙰𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.chatgpt *<texto>*_
-┣⟣❥ _.delchatgpt
-┣⟣❥ _.gptvoz *<texto>*_
-┣⟣❥ _.dall-e *<texto>*_
-┣⟣❥ _.spamwa *<numero|texto|cantidad>*_
-┣⟣❥ _.tamaño *<cantidad> <imagen / video>*_
-┣⟣❥ _.readviewonce *<imagen / video>*_
-┣⟣❥ _.clima *<país> <ciudad>*_
-┣⟣❥ _.encuesta *<texto1|texto2...>*_
-┣⟣❥ _.afk *<motivo>*_
-┣⟣❥ _.ocr *<responde a imagen>*_
-┣⟣❥ _.hd *<responde a imagen>*_
-┣⟣❥ _.acortar *<enlace / link / url>*_
-┣⟣❥ _.calc *<operacion math>*_
-┣⟣❥ _.del *<mensaje>*_
-┣⟣❥ _.whatmusic *<audio>*_
-┣⟣❥ _.readqr *<imagen (QR)>*_
-┣⟣❥ _.qrcode *<texto>*_
-┣⟣❥ _.readmore *<texto1| texto2>*_
-┣⟣❥ _.styletext *<texto>*_
-┣⟣❥ _.traducir *<texto>*_
-┣⟣❥ _.nowa *<numero>*_
-┣⟣❥ _.covid *<pais>*_
-┣⟣❥ _.horario_
-┣⟣❥ _.dropmail_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝚁𝙿𝙶 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.adventure_
-┣⟣❥ _.cazar_
-┣⟣❥ _.cofre_
-┣⟣❥ _.balance_
-┣⟣❥ _.claim_
-┣⟣❥ _.heal_
-┣⟣❥ _.lb_
-┣⟣❥ _.levelup_
-┣⟣❥ _.myns_
-┣⟣❥ _.perfil_
-┣⟣❥ _.work_
-┣⟣❥ _.minar_
-┣⟣❥ _.minar2_
-┣⟣❥ _.buy_
-┣⟣❥ _.buyall_
-┣⟣❥ _.verificar_
-┣⟣❥ _.robar *<cantidad> <@tag>*_
-┣⟣❥ _.transfer *<tipo> <cantidad> <@tag>*_
-┣⟣❥ _.unreg *<numero de serie>*_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝚂𝚃𝙸𝙲𝙺𝙴𝚁𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣ ⟣❥ _.sticker *<responder a imagen o video>*_
-┣ ⟣❥ _.sticker *<enlace / link / url>*_
-┣⟣❥  _.sticker2 *<responder a imagen o video>*_
-┣⟣❥  _.sticker2 *<enlace / link / url>*_
-┣⟣❥  _.s *<responder a imagen o video>*_
-┣⟣❥ _.s *<enlace / link / url>*_
-┣⟣❥ _.s2 *<responder a imagen o video>*_
-┣⟣❥ _.s2 *<enlace / link / url>*_
-┣⟣❥ _.emojimix *<emoji 1>&<emoji 2>*_
-┣⟣❥ _.scircle *<imagen>*_
-┣⟣❥ _.sremovebg *<imagen>*_
-┣⟣❥ _.semoji *<tipo> <emoji>*_
-┣⟣❥ _.qc *<texto>*_
-┣⟣❥ _.attp *<texto>*_
-┣⟣❥ _.attp2 *<texto>*_
-┣⟣❥ _.attp3 *<texto>*_
-┣⟣❥ _.ttp *<texto>*_
-┣⟣❥ _.ttp2 *<texto>*_
-┣⟣❥ _.ttp3 *<texto>*_
-┣⟣❥ _.ttp4 *<texto>*_
-┣⟣❥ _.ttp5 *<texto>*_
-┣⟣❥ _.pat *<@tag>*_
-┣⟣❥ _.slap *<@tag>*_
-┣⟣❥ _.kiss *<@tag>*_
-┣⟣❥ _.dado_
-┣⟣❥ _.wm *<packname> <author>*_
-┣⟣❥ _.stickermarker *<efecto> <imagen>*_
-┣⟣❥ _.stickerfilter *<efecto> <imagen>*_
-┣⟣❥ _.cartoon *<responder a imagen>*_
-┗━━━━━━━━━━━━━━━━┛
-
-┏━━━━━━━━━━━━━━━━┓
-*┃❍ 𝙾𝚆𝙽𝙴𝚁𝚂 ❍*
-┃≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡┃
-┣⟣❥ _.menuowner_
-┗━━━━━━━━━━━━━━━━┛`;
-   await conn.sendMessage(m.chat, {text: txt.trim(), mentions: [...txt.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net'), contextInfo: {forwardingScore: 9999999, isForwarded: true, mentionedJid: [...txt.matchAll(/@([0-9]{5,16}|0)/g)].map((v) => v[1] + '@s.whatsapp.net'), "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": '乂 𝙷 𝙰 𝙲 𝙷 𝙸 𝙺 𝙾 - 𝙱 𝙾 𝚃 - 𝙼 𝙳 乂', "containsAutoReply": true, "mediaType": 1, "thumbnail": [imagen6,imagen1,imagen4].getRandom(), "mediaUrl": global.gp1, "sourceUrl": global.gp1}}}, {quoted: fkon});
- // m.react('🎮');
-  } catch {
-    conn.reply(m.chat, '*[❗𝐈𝐍𝐅𝐎❗] 𝙴𝙻 𝙼𝙴𝙽𝚄 𝚃𝙸𝙴𝙽𝙴 𝚄𝙽 𝙴𝚁𝚁𝙾𝚁 𝙿𝙾𝚁𝙵𝙰𝚅𝙾𝚁 𝚄𝚂𝙴 𝙴𝙻 .allmenu*', m);
-  }
-};
-handler.help = ['menu'];
-handler.tags = ['menu'];
-handler.command = /^(menu|cmd|help|comandos)$/i;
-export default handler;
-                                                                                                                                                                                                                                                                
+function pickRandom(list) {
+  return list[Math.floor(Math.random() * list.length)]
+}
