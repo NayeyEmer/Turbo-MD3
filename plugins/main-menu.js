@@ -41,9 +41,9 @@ const defaultMenu = {
 ║╰────────────── 
 ╚══════════════════⋆
 
-╔═════「 INFORMACIÓN 」════╗
+
 ║❄️ *El bot esta en desarollo si el bot llegara presentar fallas , reportar al creador
-〬╚═════ TURBO-BOT-MD ═════╝
+〬
 
 `.trimStart(),
   header: '╔══「 %category 」═╗',
