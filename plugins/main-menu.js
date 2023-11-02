@@ -24,30 +24,30 @@ let tags = {
 const defaultMenu = {
   before: `╔═══[ TURBO-BOT-MD ]═══╗
 ║╭──────────────
-║🎄 *Nombre :* %name
-║🎄 *Limite :* %diamond
-║🎄 *Nivel :* %level
-〬║🎄 *Rango :* %role
-║🎄 *Exp :* %exp
+║❄️ *Nombre :* %name
+║❄️ *Limite :* %diamond
+║❄️ *Nivel :* %level
+〬║❄️ *Rango :* %role
+║❄️ *Exp :* %exp
 ║╰──────────────
 ╚══════════════════⋆
 
 ╔═══[ INFORMACIÓN ]═══╗
 ║╭──────────────
-║🎄 *Creador : Naye TB
-║🎄 *Numero:* wa.me/51967647592
-║🎄 *Tiempo Activo:* %muptime
-║🎄 *Registrado :* %rtotalreg de %totalreg usuarios
+║❄️ *Creador : Naye TB
+║❄️ *Numero:* wa.me/51967647592
+║❄️ *Tiempo Activo:* %muptime
+║❄️ *Registrado :* %rtotalreg de %totalreg usuarios
 ║╰────────────── 
 ╚══════════════════⋆
 
-╔═════「 FECHA 」════╗
-║🎄 *Fecha :* %date
+╔═════「 DATO SOBRE EL BOT 」════╗
+║❄️ *El BOT ESTA EN PLENO DESAROLLO\n\nSI LLEGARA A PRESENTAR FALLAS REPORTAR
 〬╚═════ TURBO-BOT-MD ═════╝
 
 `.trimStart(),
   header: '╔══「 %category 」═╗',
-  body: '║🎄  %cmd',
+  body: '║❄️  %cmd',
   footer: '╚════ TURBO-BOT-MD ════╝\n',
   after: `
 `,
