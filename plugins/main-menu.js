@@ -32,7 +32,7 @@ const defaultMenu = {
 ║╰──────────────
 ╚══════════════════⋆
 
-╔═══[ INFORMACIÓN ]═══╗
+╔═══[ CREADOR ]═══╗
 ║╭──────────────
 ║❄️ *Creador : Naye TB
 ║❄️ *Numero:* wa.me/51967647592
@@ -41,8 +41,8 @@ const defaultMenu = {
 ║╰────────────── 
 ╚══════════════════⋆
 
-╔═════「 DATO SOBRE EL BOT 」════╗
-║❄️ *El BOT ESTA EN PLENO DESAROLLO SI LLEGARA A PRESENTAR FALLAS REPORTAR AL CREADOR
+╔═════「 INFORMACIÓN 」════╗
+║❄️ *El bot esta en desarollo si el bot llegara presentar fallas , reportar al creador
 〬╚═════ TURBO-BOT-MD ═════╝
 
 `.trimStart(),
