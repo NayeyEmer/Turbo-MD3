@@ -42,7 +42,7 @@ const defaultMenu = {
 ╚══════════════════⋆
 
 ╔═════「 DATO SOBRE EL BOT 」════╗
-║❄️ *El BOT ESTA EN PLENO DESAROLLO\n\nSI LLEGARA A PRESENTAR FALLAS REPORTAR
+║❄️ *El BOT ESTA EN PLENO DESAROLLO SI LLEGARA A PRESENTAR FALLAS REPORTAR AL CREADOR
 〬╚═════ TURBO-BOT-MD ═════╝
 
 `.trimStart(),
