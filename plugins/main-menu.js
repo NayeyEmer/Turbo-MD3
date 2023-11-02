@@ -42,7 +42,7 @@ const defaultMenu = {
 ╚══════════════════⋆
 
 
-║❄️ *El bot esta en desarollo si el bot llegara presentar fallas , reportar al creador
+❄️ *Hola @user 🐶 recuerda que el bot aun está desarollo si llegara a presentar fallas se te agradeceria si reportas con el creador
 〬
 
 `.trimStart(),
